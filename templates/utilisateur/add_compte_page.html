@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<br><br><br><br><br>
+      <div class="container-fluid">
+          <div class="row justify-content-center ">
+               <div class="card col-11 col-sm-9 col-md-8 col-lg-5 border-secondary border-5 border-start-0 border-end-0 shadow p-2 mt-30 rounded-5 bg-white">
+                    <div class="card-body">
+                         
+                         {% if add_abonne %}
+                              <form method="post" action="{% url 'add_compte_url' %}" class="form"> {% csrf_token %}
+                         {% else %}
+                              <form method="post"  class="form"> {% csrf_token %}
+                         {% endif %}
+                              
+                           <h1 class="text-center text-dark" style="font-size:60px"><i class="fa fa-user-plus p-0" aria-hidden="true"></i>Abonné</h1>
+                           <br>
+                              {% if message %}
+                              <p class="text-center text-danger"> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>   {{message}}</p>
+                              {% endif %}
+
+                              <label for="id_first_name">Nom</label>
+                              <p class='m-0 p-0 shadow-sm mb-4'> {{ form.first_name }}</p>
+
+                              <label for="id_last_name"> Prénom</label>
+                              <p class='m-0 p-0 shadow-sm mb-4'> {{ form.last_name }}</p>
+
+                              <label for="id_username">Nom d'utilisateur</label>
+                              <p class='m-0 p-0 shadow-sm mb-4'> {{ form.username }}</p>
+
+                              <label for="id_username">Mot de passe</label>
+                              <p class='m-0 p-0 shadow-sm mb-4'> {{ form.password1 }}</p>
+
+                              <label for="id_username">Mot de passe de confirmation</label>
+                              <p class='m-0 p-0 shadow-sm mb-4'> {{ form.password2 }}</p>
+
+
+                              <label for="id_genre">Genre</label>
+                              <p class='m-0 p-0 shadow-sm mb-4 col-md-4'> {{ form.genre }}</p>
+                              
+                              <label for="id_ecole">Ecole</label> <a href="{% url 'add_ecole_url' %}"><i class="fa fa-plus-circle text-primary ms-3" aria-hidden="true" id="ecole"></i></a>
+                              <p class='m-0 p-0 shadow-sm mb-4'> {{ form.ecole }}</p>
+                              
+                              <label for="id_classe">Classe</label> <a href="{% url 'add_classe_url' %}"><i class="fa fa-plus-circle text-primary ms-3" aria-hidden="true" id="classe" ></i></a>
+                              <p class='m-0 p-0 shadow-sm mb-4 col-md-4'> {{ form.classe }}</p>
+
+                              <label for="id_annee_scolaire">Année scolaire</label><a href="{% url 'add_annee_scolaire_url' %}"><i class="fa fa-plus-circle text-primary ms-3" aria-hidden="true" id="classe" ></i></a>
+                              <p class='m-0 p-0 shadow-sm mb-4 col-md-4'> {{ form.annee_scolaire }}</p>
+                              
+                              <label for="id_telephone">Téléphone</label>
+                              <p class='m-0 p-0 shadow-sm mb-4 col-md-4'> {{ form.telephone }}</p>
+                              
+                              <label for="id_email">Email</label>
+                              <p class='m-0 p-0 shadow-sm mb-4'> {{ form.email }}</p>
+                              
+                              <p class='m-0 p-0 mb-4'> {{ form.is_staff }}</p>
+                              <label for="id_is_staff">Est-il animateur ?</label>
+                               
+                              <br>
+                              <hr>
+                              
+                               {% if add_abonne %}
+                              <p class="text-end"><button type="submit" class="btn bg-dark text-light rounded-pill btn-block shadow-0 fw-bold">Ajouter</button></p>
+                              {% else %}
+                              <p class="text-end"><button type="submit" class="btn bg-dark text-light rounded-pill btn-block shadow-0 fw-bold">Modifier</button></p>
+                              {% endif %}
+                                   
+                         </form>
+                    
+                    </div>
+               </div> 
+          </div> 
+     </div>
+     <br>
+{% endblock body %}
+
+          

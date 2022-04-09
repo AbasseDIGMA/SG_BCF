@@ -1,0 +1,20 @@
+
+    <div class="container-fluid">
+      <footer class="py-3">
+          <small style="font-size:10px">
+          <ul class="nav justify-content-center border-bottom pb-1 mb-1 ">
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted"> <i class="fa fa-id-card" aria-hidden="true"></i>  Abonnement</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted"> <i class="fa fa-commenting" aria-hidden="true"></i>  Contacter</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted"> <i class="fa fa-address-book" aria-hidden="true"></i>  A propos</a></li>
+            
+            {% if user.is_staff %}
+            <li class="nav-item"><a href="{% url 'home_pret_url' %}" class="nav-link px-2 text-muted"> <i class="fa fa-cog" aria-hidden="true"></i> Administration</a></li>
+            {% endif %}
+          </ul>
+
+          <p class="text-center text-muted">© 2022 Ecole Supérieure d'Informatique, ESI</p> 
+          {% comment %} <p class="text-end text-muted"><small>DIGMA Abasse / digmaabasse4@gmail.com</small> </p>  {% endcomment %}
+      </small>
+      </footer>
+    </div>
+  

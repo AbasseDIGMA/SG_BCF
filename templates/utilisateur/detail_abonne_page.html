@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<br><br>
+     <div class="container">
+          <div class="row">
+               <div class="col-md-8">
+                    <div class="card rounded shadow">
+                         <div class="card_header bg-info text-light ps-5 ">
+                             <h2>{{ abonne_choisi.username }}</h2>
+                         </div>
+                         <div class="card_body">
+
+                              <table class="table text-start">
+                                   <tr> <td class="fw-bold">Numero de compte</td>  <td>{{ abonne_choisi.id }}</td></tr>
+                                   <tr> <td class="fw-bold">Nom</td>  <td>{{ abonne_choisi.first_name|title }}</td></tr>
+                                   <tr><td class="fw-bold">Prénom</td>  <td>{{ abonne_choisi.last_name|title }}</td></tr>
+                                   <tr><td class="fw-bold">Ecole</td>  <td>{{ abonne_choisi.ecole }}</td></tr>
+                                   <tr><td class="fw-bold">Classe</td>  <td>{{ abonne_choisi.classe }}</td></tr>
+                                   <tr><td class="fw-bold">Année scolaire</td>  <td>{{ abonne_choisi.annee_scolaire }}</td></tr>
+                                   <tr><td class="fw-bold">Genre</td>  <td>{{ abonne_choisi.genre }}</td></tr>
+                                    <tr> <td class="fw-bold">Email</td>  <td>{{ abonne_choisi.email }}</td></tr>
+                                    <tr><td class="fw-bold">Numero de Téléphone</td>  <td>{{ abonne_choisi.telephone }}</td></tr>
+                                    <tr>
+                                        <td class="fw-bold">Emprunt en cours</td> 
+                                        <td> 
+                                             {% if abonne_choisi.emprunt_en_cours %}
+                                              OUI   <i class="fa fa-circle me-2" style="color:#00a521" aria-hidden="true"></i>
+                                              {% else %}
+                                              NON   <i class="fa fa-circle me-2 text-danger" aria-hidden="true"></i>
+                                             {% endif %}
+                                             </td>
+                                   </tr>
+                                    <tr><td class="fw-bold">Ajouter le  </td>  <td>{{ abonne_choisi.date_joined|date:"d/m/Y  à  H:i:s" }}</td></tr>
+                                    <tr><td class="fw-bold">Dernière connexion  </td>  <td>{{ abonne_choisi.last_login|date:"d/m/Y  à  H:i:s" }}</td></tr>
+                                   </table>
+                                   {% comment %} <i class="fa fa-id-card shadow text-info "  aria-hidden="true"></i> {% endcomment %}
+                         </div>
+                    </div>
+               </div>
+
+               <div class="col-md-4 text-center">
+                    <div class=" " style="font-size:80px" ><a href="{% url 'edit_carte_url' abonne_choisi.id %}"><i class="fa fa-id-card-alt text-info"  aria-hidden="true"></i></a></div>
+                    <p class="text-secondary"><small> Etablire une carte d'abonnement pour   <small class="fw-bold text-black">{{abonne_choisi.username}}</small></small></p>
+               </div>
+          </div>
+     </div>
+
+<br><br>
+{% endblock body %}

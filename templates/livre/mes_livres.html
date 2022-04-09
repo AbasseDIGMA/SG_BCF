@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<br><br><br>
+<h3 class="ms-5 text-secondary text-center">Date du jour: <b class="text-danger">{% now "d/m/Y" %}</b></h3>
+<br>
+  {% if pret %}
+<div class="container">
+     <div class="row">
+          <div class="col-md-9 m-auto">
+               <div class="card rounded shadow">
+                    <div class="card_header bg-danger text-light text-center ">
+                         
+                       
+                         <h3>Votre emprunt en cours est:</h3>
+                              
+                    </div>
+                    <div class="card_body">
+                              <table class="table text-start">
+                                   <tr> <td class="fw-bold">Titre</td>  <td>{{ pret.livre|title}}</td></tr>
+                                   <tr> <td class="fw-bold">Auteur</td>  <td>{{livre.auteur|title }}</td></tr>
+                                   <tr><td class="fw-bold">Date d'emprunt</td> <td>{{ pret.date_de_sortie|date:"d/m/Y" }}</td></tr>
+                                   <tr><td class="fw-bold">Delait de retour</td>  <td>{{ pret.delait_de_retour|date:"d/m/Y" }}</td></tr>
+                              </table>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+     <br><br>
+     
+     {% if en_retard %}
+           <div class="text-center text-secondary"><h3>Vous êtes en retard de  <b class="text-danger text-white bg-danger rounded-pill p-2 m-1" style="font-size:30px">{{jour_de_retard}}</b> jours. Veuillez passer à la bibliothèque pour rendre votre livre.</h3></div>
+          {% elif j_jour%}
+          <div class="text-center text-secondary"><h3>Dernier jour de l'emprunt. Veuillez passer à la bibliothèque pour rendre votre livre.</h3></div>
+          {% else %}
+          <div class="text-center text-secondary"><h3>Vous avez <b class="text-danger text-white bg-danger rounded-pill p-2 m-1" style="font-size:30px">{{temps_restant}}</b> jours restants</h3></div>
+     {% endif %}
+          
+   {% else %}
+   <br><br><br><br><br>
+<h2 class="text-secondary text-center">{{message}}</h2>
+<br><br><br><br><br>
+ {% endif %}
+{% endblock body %}

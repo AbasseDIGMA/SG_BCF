@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<br><br><br><br>
+      <div class="container-fluid">
+          <div class="row justify-content-center ">
+
+                    {% if message %}
+                    <p class="text-center text-danger"> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>   {{message}}</p>
+                    {% endif %}
+                    
+               <div class="card col-11 col-sm-9 col-md-8 col-lg-5 border-secondary border-5 border-start-0 border-end-0 shadow p-2 mt-30 rounded-5 bg-white">
+                    <div class="card-body">
+                         
+                         {% if add_livre %}
+                         <form method="post" enctype="multipart/form-data" action="{% url 'add_livre_url' %}" class="form"> {% csrf_token %}
+                         {% else %}
+                         <form method="post" enctype="multipart/form-data" class="form"> {% csrf_token %}
+                         {% endif %}
+                              
+                           <h1 class="text-center text-dark" style="font-size:60px"><i class="fa fa-book p-0" aria-hidden="true"></i>Livre</h1>
+                              <label for="id_titre">Titre</label>
+                              <p class='m-0 p-0 shadow-sm mb-4'> {{ form.titre }}</p>
+
+                              <label for="id_auteur"> Auteur</label>
+                              
+                              {% if add_livre %}
+                                   <a href="{% url 'add_auteur_url' %}"><i class="fa fa-plus-circle rounded-circle  text-primary bg-white ms-5" style="fon-size:20px" aria-hidden="true"></i></a>
+                              {% endif %}
+                                   
+                              <p class='m-0 p-0 shadow-sm mb-4'> {{ form.auteur }}</p>
+
+                              <label for="id_categorie" >Catégorie</label>
+                              
+                              {% if add_livre %}
+                                   <a href="{% url 'add_categorie_url' %}"><i class="fa fa-plus-circle rounded-circle  text-primary bg-white ms-5" style="fon-size:20px" aria-hidden="true"></i></a>
+                              {% endif %}
+
+                              <p class='m-0 p-0 shadow-sm mb-4 col-md-5'> {{ form.categorie }}</p>
+                              
+                              <label for="id_exemplaire" >Exemplaire</label>
+                              <p class='m-0 p-0 shadow-sm mb-4 col-md-2'> {{ form.exemplaire }}</p>
+
+                              <label for="id_desc">Description</label>
+                              <p class='m-0 p-0 shadow-sm mb-4'> {{ form.desc }}</p>
+
+                              {% comment %}<label for="id_ISBN">ISBN</label>
+                              <p class='m-0 p-0 shadow-sm mb-4'> {{ form.ISBN }}</p> {% endcomment %}
+
+                              <label for="id_image">Image</label>
+                              <p class='m-0 p-0  mb-4'> {{ form.image }}</p>
+                              <br>
+                              <hr>
+                              
+                              {% if add_livre %}
+                              <p class="text-end"><button type="submit" class="btn bg-dark text-light rounded-pill btn-block shadow-0 fw-bold">Ajouter</button></p>
+                              {% else %}
+                              <p class="text-end"><button type="submit" class="btn bg-dark text-light rounded-pill btn-block shadow-0 fw-bold">Modifier</button></p>
+                              {% endif %}
+                                   
+                         </form>
+                    </div>
+               </div> 
+          </div> 
+     </div>
+{% endblock body %}
+
+          

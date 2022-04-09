@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<br><br>
+<div class="container-fluid">
+<div class="fixed-bottom text-end m-2" style="font-size:60px" ><a href="{% url 'add_pret_url' %}"><i class="fa fa-plus-circle rounded-circle shadow bg-white text-primary"aria-hidden="true"></i></a></div>
+
+{% if list_pret %}   
+     <h1 class="fw-bold p-4 text-light rounded-pill rounded-start col-md-6 text-end  shadow-lg bg-primary">{{ nombre_de_pret}}  PRÊTS EN COURS <i class="fa fa-address-book" aria-hidden="true"></i></h1>
+     <h3 class="ms-5 text-secondary text-end">Date du jour: <b class="text-primary">{% now "d/m/Y" %}</b></h3>
+     <div class="row pe-3 ps-3">
+     <table class="table table-hover bg-white table-bordered col-10 col-sm-10 col-md-10 col-lg-11 mt-3 shadow rounded "> 
+          <thead class="table-white rounded"> 
+               <tr>
+                    <th class="text-center">N pret</th>
+                    <th>Abonné</th>
+                    <th>Livre</th>
+                    <th >Date de sortie</th>
+                    <th >Delait de retour</th>
+                    <th class="text-center">Statut</th>
+                    <th class="text-center" >Actions</th>
+               </tr>
+
+
+          </thead>
+          <tbody>
+                    {% for pret in list_pret %}
+                         <tr>
+                              <td class="text-center fw-bold"><small>{{ pret.id }}</small></td>
+                              <td> <small>({{pret.abonne_id}})  {{pret.abonne }}</small></td>
+                              <td> <small>({{pret.livre_id}})  {{ pret.livre }}</small></td>
+                              <td> <small>{{ pret.date_de_sortie|date:"d/m/Y"}}</small></td>
+                              <td> <small>{{ pret.delait_de_retour|date:"d/m/Y"}}</small></td>
+                              {% now 'Y/m/d' as today %}
+                              {% if today < pret.delait_de_retour|date:"Y/m/d" %}
+                              <td class=" fw-bold text-center" style="color:#00a521"> <small>A jour</small></td>
+                              {% else %}
+                              <td class="text-danger fw-bold text-center"> <small>Non à jour</small></td>
+                              {% endif %}
+                                   
+
+                                   
+                              <td class="text-center col-2 col-md-2">
+                                   {% comment %} <a href="#"> <button class="btn btn-info me-1 badge"> Details</button></a>
+                                   <a href="#"><button class="btn btn-warning me-1 badge"><i class="fa fa-pencil" aria-hidden="true"></i></button></a> {% endcomment %}
+                                   <button  data-toggle="modal" data-target="#retour_pret_confirm{{pret.id}}" class="btn btn-warning text-black badge">Retourner</button></a>
+                                   {% include 'modals/retour_pret_confirm.html' %}
+
+                              </td>
+                         </tr>
+                    {% endfor %}
+               </tbody>
+     </table>
+     </div>
+     </div>
+     <br><br><br>
+{% else %}
+
+<br><br><br><br><br>
+<h2 class="text-secondary text-center"> Aucun livre emprunté</h2>
+{% endif %}
+
+
+
+
+
+{% endblock body%}

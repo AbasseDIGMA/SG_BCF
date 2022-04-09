@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<br><br><br><br>
+<div class="container">
+     <div class="row m-auto">
+               <div class="col-md-6 mb-4">
+                         <div class=" row justify-content-center">
+                              <div class="card text-center  shadow">
+                                   <div class="card-header text-start bg-white text-center m-5">
+                                        {% if livre_choisi.image %}
+                                             <img class="shadow" src="{{livre_choisi.image.url}}" style="height:280px; width:200px" alt="...">
+                                             {% else %}
+                                             <i class="fa  text-center bg-secondary shadow text-primary" style="font-size:90px; height:210px; width:190px" aria-hidden="true">{{livre_choisi.titre|slice:"1"}}</i> 
+                                             {% endif %}
+                                             <h2 class="card-title text-primary p-1 fw-bold mt-3">{{livre_choisi.titre|title}}</h2>
+                                   </div>
+                                   <div class="card-body">
+                              
+                                        <table class="table ">
+                                             <tbody class="text-start">
+                                                  <tr>
+                                                       <tr>
+                                                            <td class="fw-bold">Auteur</td>
+                                                            <td class="text-secondary">{{ livre_choisi.auteur }} <a href="#"  data-toggle="modal" data-target="#detail_auteur" ><i class="fa fa-info-circle text-primary ms-3" aria-hidden="true"></i>  Plus</a></td>
+                                                       </tr>
+                                                       
+                                                       <tr>
+                                                            <td class="fw-bold">Catégorie</td>
+                                                            <td class="text-secondary">{{ livre_choisi.categorie }}</td>
+                                                       </tr>
+
+                                                       <tr>
+                                                            <td class="fw-bold">Frequence de sortie</td>
+                                                            <td class="text-secondary">{{ livre_choisi.frequence }}</td>
+                                                       </tr>
+
+                                                       <tr>
+                                                            <td class="fw-bold">Nombre d'exemplaire</td>
+                                                            <td class="text-secondary">{{ livre_choisi.exemplaire }}</td>
+                                                       </tr>
+
+                                                       <tr>
+                                                            <td class="fw-bold">Description</td>
+                                                            <td class="text-secondary">{{ livre_choisi.desc }} </td>
+                                                       </tr>
+                                                       
+                                                       <tr>
+                                                            <td class="fw-bold">Ajouter le  </td>
+                                                            <td class="text-secondary"><small>{{ livre_choisi.creer_le|date:"d/m/Y  à  H:i:s"}}</small></td>
+                                                       </tr>
+
+                                                  </tr>
+                                             </tbody>
+                                        </table>
+                              
+                              </div>
+                              
+                              </div>
+                         </div>
+     
+               </div>
+
+
+<!--------------------------------------------------Livre de meme auteur------------------------------------->                  
+
+{% if de_meme_auteur  %}
+
+<div class="col-md-5">                 
+               <h4 class=" bg-danger text-white p-1 text-center">Autres livres de {{ livre_choisi.auteur }}</h4>
+                    <div class="row">
+                         {% for livre in de_meme_auteur %}
+                         <div class="col-md-12">
+                              
+                              {% if livre.exemplaire is 0 %}
+                                   <div class=" card col-md-12 shadow rounded bg-light p-1 me-2 mb-3" style="opacity:0.7">
+                                   {% else %}
+                                   <div class=" card col-md-12 shadow rounded bg-white p-1 me-2 mb-3" >
+                              {% endif %}
+                                   
+                              <div class="d-flex" style="flex-direction:row">
+                                   <a href=" {% url 'detail_livre_url' livre.id %}">
+                                        <div class="me-3" >
+                                             {% if livre.image %}
+                                             <img class="card-img-top shadow" src="{{livre.image.url}}" style="height:100px; width:80px" alt="...">
+                                             {% else %}
+                                             <i class="fa  text-center bg-secondary shadow p-1" style="font-size:90px; height:100px; width:80px" aria-hidden="true"> {{livre.titre|slice:"1"}}</i> 
+                                             {% endif %}
+                                        </div>
+                                   </a>
+                               <div>
+                              <p>
+                                   <a href=" {% url 'detail_livre_url' livre.id %}"> <h6 class="card-title text-primary"> <small><u class="fw-bold">{{livre.titre|title}}</small></u></h6></a>
+                                   <h6 class="card-text text-muted"><small>{{livre.auteur}}</small></h6>
+                              </p>
+                         {% if livre.exemplaire is 0 %}
+                              <small style="font-size:10px" class="fw-bold"> Exemplaires:  <b class=" badge rounded-pill bg-danger" style="font-size:10px">{{ livre.exemplaire }}</b> <small class="text-danger">Indisponible</small> </small>  
+                              {% else %}
+                              <small style="font-size:10px" class="fw-bold"> Exemplaires:   <b class=" badge rounded-pill" style="background-color:#00a521 ; font-size:10px">{{ livre.exemplaire }}</b></small>
+                              {% endif %}
+                              <p><h6 style=" font-size:10px" class="text-secondary"><small>Ajouter il y a   {{ livre.creer_le|timesince}}</small></p>
+                    </div>
+                         
+                    </div>
+                    </div>
+               </div>
+                    {% endfor %}
+               </div>
+           </div>
+     {% endif %}
+     
+     </div>
+
+<br>
+
+<!--------------------------------------------------Livre de meme categorie-------------------------------------> 
+{% if de_meme_categorie %}
+               <div class="container-fluid p-0 m-0">                 
+                    <h4 class="text-light bg-danger text-center p-1 mb-3"> Quelques livres de même types </h4>
+                    <div class="row">
+                         {% for livre in de_meme_categorie %}
+                         <div class="col-md-3">
+                                {% if livre.exemplaire is 0 %}
+                              <div class=" card col-md-12 shadow rounded bg-light p-1 me-2 mb-3" style="opacity:0.7">
+                                   {% else %}
+                                   <div class=" card col-md-12 shadow rounded bg-white p-1 me-2 mb-3" >
+                              {% endif %}
+                              <div class="d-flex" style="flex-direction:row">
+                                   <a href=" {% url 'detail_livre_url' livre.id %}">
+                                   <div class="me-3" >
+                                        {% if livre.image %}
+                                        <img class="card-img-top shadow" src="{{livre.image.url}}" style="height:100px; width:80px" alt="...">
+                                        {% else %}
+                                        <i class="fa  text-center bg-secondary shadow p-1" style="font-size:90px; height:100px; width:80px" aria-hidden="true"> {{livre.titre|slice:"1"}}</i> 
+                                        {% endif %}
+                                   </div>
+                              </a>
+                              <div>
+                         <p>
+                              <a href=" {% url 'detail_livre_url' livre.id %}"> <h6 class="card-title text-primary"> <small><u class="fw-bold">{{livre.titre|title}}</small></u></h6></a>
+                              <h6 class="card-text text-muted"><small>{{livre.auteur}}</small></h6>
+                         </p>
+                         {% if livre.exemplaire is 0 %}
+                         <small style="font-size:10px"class="fw-bold"> Exemplaires:   <b class=" badge rounded-pill bg-danger" style=" font-size:10px">{{ livre.exemplaire }}</b> <small class="text-danger">Indisponible</small> </small>
+                         {% else %}
+                         <small style="font-size:10px" class="fw-bold"> Exemplaires:   <b class=" badge rounded-pill" style="background-color:#00a521 ; font-size:10px">{{ livre.exemplaire }}</b></small>
+                         {% endif %}
+                         <p><h6 style=" font-size:10px" class="text-secondary"><small>Ajouter il y a   {{ livre.creer_le|timesince}}</small></p>
+                    </div>
+                         
+                    </div>
+                    </div>
+               </div>
+                    {% endfor %}
+               </div>
+           </div>
+{% endif %}
+     
+     </div>
+
+{% include 'modals/modal_detail_auteur.html' %}
+
+{% endblock body %}

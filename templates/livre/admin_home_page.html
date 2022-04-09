@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block body %}
+<br><br>
+<div class="fixed-bottom text-end m-2" style="font-size:60px" ><a href="{% url 'add_livre_url' %}"><i class="fa fa-plus-circle rounded-circle shadow  text-danger bg-white"aria-hidden="true"></i></a></div>
+
+
+<div class="container-fluid">
+     <h1 class="bg-danger fw-bold p-4 text-light rounded-pill rounded-start col-md-6 text-end  shadow-lg">{{ nombre_de_livre }}  LIVRES <i class="fa fa-book" aria-hidden="true"></i></h1>
+     <div class="row pe-3 ps-3">
+     <table class="table table-hover bg-white table-bordered col-10 col-sm-10 col-md-10 col-lg-11 mt-3 shadow rounded "> 
+          <thead class="table-white rounded"> 
+               <tr>
+                    <th class="text-center">Cote</th>
+                    <th>Titre</th>
+                    <th>Autteur</th>
+                    <th>Catégorie</th>
+                    <th class="text-center">Exemplaires</th>
+                    <th class="text-center">Frequence</th>
+                    <th class="text-center">Actions</th>
+               </tr>
+          </thead>
+          <tbody>
+                    {% for livre in list_livre %}
+                         <tr>
+                              <td class="text-center fw-bold"><small>{{ livre.id }}</small></td>
+                              <td> <small>{{ livre.titre }}</small></td>
+                              <td> <small>{{ livre.auteur }}</small></td>
+                              <td> <small>{{ livre.categorie }}</small></td>
+                              <td class="text-center"> <small>{{ livre.exemplaire }}</small></td>
+                              <td class="text-center"> <small>{{ livre.frequence }}</small></td>
+                    
+                              <td class="text-center col-2 col-md-2">
+                                   <a href="{% url 'detail_livre_url' livre.id %}"> <button class="btn btn-info me-1 badge"> Details</button></a>
+                                   <a href="{% url 'modifier_livre_url' livre.id %}"><button class="btn btn-warning me-1 badge"><i class="fa fa-pencil" aria-hidden="true"></i></button></a>
+
+                                   {% if user.is_superuser %}
+                                        <button  data-toggle="modal" data-target="#delete_confirm_livre{{livre.id}}" class="btn btn-danger text-black badge"><i class="fa fa-times" aria-hidden="true"></i></button></a>
+                                   {% endif %}
+                                   
+                                   {% include 'modals/delete_confirm_livre.html' %}
+
+                              </td>
+                         </tr>
+                    {% endfor %}
+          </tbody>
+</table>
+</div>
+</div>
+
+{% endblock body%}

@@ -1,0 +1,24 @@
+{% include "stylisation.html" %}
+
+     <body style="background-color:#eeeef5">
+          <br><br><br>
+          <div class="container-fluid col-10 col-sm-10 col-md-10 col-lg-10">
+               <div class="row justify-content-center">
+
+                     {% if message %}
+                    <p class="text-center text-danger"> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>   {{message}}</p>
+                    {% endif %}
+                    
+                    <div class="col-md-4 bg-dark p-3 shadow-lg shadow rounded h-auto">
+                         <a href="{% url 'add_auteur_url' %}" class="float-end text-danger"><i class="fa fa-times" aria-hidden="true"></i></a>
+                         <form action="{% url 'add_nationalite_url' %}" method='POST'> {% csrf_token %}
+                              <p><label for="classe" class="text-warning"> Ajouter une nationalité</label></p>
+                              <p>{{form.nationalite}}</p>
+                              <hr class="bg-white">
+                              <button type="submit" class="btn btn-success me-2">Ajouter</button>
+                         </form>
+                    </div>
+               </div>
+          </div>
+     </body>
+</html>

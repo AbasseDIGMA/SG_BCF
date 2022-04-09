@@ -1,0 +1,24 @@
+
+
+{% extends 'base.html' %}
+
+{% block title %}changer mot de passe{% endblock title %}
+{% block body %}
+<br><br><br>
+     <div class="container-fluid">
+          <div class="row justify-content-center ">
+               <div class="card col-sx-12 col-10 col-sm-8 col-md-6 col-lg-4 border-secondary border-5 border-start-0 border-end-0 shadow p-2 mt-30 rounded-5 bg-white">
+                    <div class="card-body">
+                         <form method="post" action="{% url 'change_pass_url' %}" class="form"> {% csrf_token %}
+                              <h1 class="text-center text-secondary" style="font-size:90px"><i class="fa fa-unlock-alt p-0" aria-hidden="true"></i></h1>
+                              <p class="text-success text-center"> <small>{{ message }}</small></p>
+                              {{form.as_p}}
+                              <br>
+                              <hr>
+                              <p class="text-end"><button type="submit" class="btn bg-secondary text-light rounded-pill btn-block shadow-0 fw-bold">Appliquer le changement</button></p>
+                         </form>
+                    </div>
+               </div>
+          </div>
+     </div>
+{% endblock body %}

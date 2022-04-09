@@ -1,0 +1,37 @@
+{% include 'stylisation.html' %}
+<br><br><br><br><br>
+<div class="container">
+     <div class="row justify-content-center">
+          <div class=" card col-5 border-1 border-primary shadow rounded-3">
+               <div class="row text-white bg-primary text-center pt-2 fw-bold mb-2">
+                    <h6 class="fw-bold">BIBLIOTHEQUE COMMUNAUTAIRE DE FARAKAN</h6>
+               </div>
+               <div class="row">
+                    <div class="col-8">
+                         
+                         <h6>Bobo-Dioulasso</h6>
+                         <h2 class="text-danger"><b>N :  </b>{{abonne.id}}</h2>
+                         <small><b>Prix</b> :  <input type="text" class="col-4 border-0" placeholder='................'></small>
+                         <p><small><b>Année Scolaire :  </b>  {{abonne.annee_scolaire}}</small></p>
+                         
+                    </div>
+                    <div class="col-4 text-end">
+                         <p class="text-center pt-4 m-4 text-secondary border" style="height:100px; width:100px">Photo</p>
+                    </div>
+               </div>
+               <div style="font-size:12px">
+                    <p class="text-center text-primary"><small>--------------------Carte d'accès à la bibli--------------------</small></p>
+               </div>
+                    <h6><small><b class="me-2">Nom :</b>{{abonne.first_name}}</small></h6>
+                    <h6><small><b class="me-2">Prénom :</b>{{abonne.last_name}}</small></h6>
+                    {% if abonne.ecole %}
+                    <h6><small><b class="me-2">Ecole :</b>{{abonne.ecole}} / {{abonne.classe}}</small></h6>
+                    {% endif %}
+                    
+                    {% if abonne.telephone %}
+                    <h6><small><b class="me-2">Téléphone :</b>{{abonne.telephone}}</small></h6>
+                    {% endif %}
+                    <h6 class="text-end " style="font-size:10px"><small>Le Responsable</small></h6>
+           </div>
+     </div>
+</div>

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body %}
+
+<br>
+ <div class="container-fluid m-0 p-0">
+<div class="row justify-content-center m-auto" >
+
+  {% if list_livre %}
+
+  {% for livre in list_livre %}
+
+  {% if livre.exemplaire is 0 %}
+  <div class=" card col-11 col-sm-5 col-md-5 col-lg-3 shadow rounded bg-light p-1 me-3 mb-3" style="opacity:0.7" >
+    {% else %}
+    <div class=" card col-11 col-sm-5 col-md-5 col-lg-3 shadow rounded bg-white p-1 me-3 mb-3" >
+  {% endif %}
+    
+    <div class="d-flex" style="flex-direction:row">
+      <a href=" {% url 'detail_livre_url' livre.id %}">
+      <div class="m-2 me-4" >
+              {% if livre.image %}
+            <img class="card-img-top shadow" src="{{livre.image.url}}" style="height:100px; width:80px" alt="...">
+            {% else %}
+            <i class="fa  text-center bg-secondary shadow " style="font-size:90px; height:100px; width:80px" aria-hidden="true">{{livre.titre|slice:"1"}}</i> 
+          {% endif %}
+      </div>
+    </a>
+    <div>
+        <p>
+          <a href=" {% url 'detail_livre_url' livre.id %}" class="text-decoration-none" > <h6 class="card-title text-primary"> <small><u class="fw-bold">{{livre.titre|title}}</small></u></h6></a>
+            <h6><small class="card-text text-muted">{{livre.auteur}}</small></h6>
+          </p>
+          
+          {% if livre.exemplaire is 0 %}
+          <small style="font-size:10px" class="fw-bold">Exemplaires:   </small><b class=" badge rounded-pill bg-danger">{{ livre.exemplaire }} </b><small style="font-size:10px" class="text-danger"> Indisponible</small>
+            {% else %}
+            <small style="font-size:10px" class="fw-bold">Exemplaires:  </small><b class="badge rounded-pill" style="background-color:#00a521">{{ livre.exemplaire }}</b>
+          {% endif %}
+            
+           <p><h6 style=" font-size:10px" class="text-secondary"><small>Ajouter il y a   {{ livre.creer_le|timesince}}</small></h6></p>
+      </div>
+  </div>
+  </div>
+  {% endfor %}
+</div>
+</div>
+{% else %}
+<h2 class="text-center text-secondary"> Aucun resultat trouvé</h2>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endif %}
+
+{% endblock body %}

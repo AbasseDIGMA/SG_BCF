@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}utilisateur{% endblock title %}
+{% block body %}
+<br><br><br>
+     <div class="container-fluid">
+          <div class="row justify-content-center ">
+               <div class="card col-sx-12 col-10 col-sm-8 col-md-6 col-lg-4 border-secondary border-5 border-start-0 border-end-0 shadow p-2 mt-30 rounded-5 bg-white">
+                    <div class="card-body">
+                         <form method="post" action="{% url 'login_url' %}" class="form"> {% csrf_token %}
+                              <h1 class="text-center text-secondary" style="font-size:90px"><i class="fa fa-user-circle p-0" aria-hidden="true"></i></h1>
+                              <p class="text-danger text-center"> <small>{{ message }}</small></p>
+                              <label for="id_user">Nom d'utilisateur</label>
+                              <p class='m-0 p-0 shadow-sm mb-3'> {{ form.username }}</p>
+                              <label for="id_password">Mot de passe</label>
+                              <p class='m-0 p-0 shadow-sm'> {{ form.password }}</p>
+                              <br>
+                              <button type="submit" class="btn bg-secondary text-light rounded-pill btn-block shadow-0 "> Me connecter</button>
+                              <a href="#"><p class="text-end text-primary mt-2"><small>Mot de passe oublier</small></p></a>
+                              <hr>
+                              <p class="text-center"> <small>Vous avez pas de compte? <a href="{% url 'info_url' %}"><i class="fa fa-info-circle ms-2" aria-hidden="true"></i></a></small> </p>
+                         </form>
+                    </div>
+               </div>
+          </div>
+     </div>
+{% endblock body %}
+

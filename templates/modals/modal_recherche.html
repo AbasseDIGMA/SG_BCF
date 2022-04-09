@@ -1,0 +1,24 @@
+<div class="container-fluid">
+     <div class="row">
+          <div class="modal-sm">
+               <div class="modal fade" id="recherche" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                 <div class="modal-dialog">
+                   <div class="modal-content">
+                     <div class="modal-body">
+                         <div class="row mt-1">
+                              <form action="{% url 'recherche_livre_url'%}" method="POST"> {% csrf_token %}
+                                   <div class="input-group rounded">
+                                        <input type="search"  name="mot" class="form-control rounded" placeholder=" Recherche" aria-label="Search" autofocus  />
+                                        <span class="input-group-text border-0 bg-white" id="search-addon">
+                                          <button class="btn btn-default" type="submit"></a><i class="fas fa-search"></i></button>
+                                        </span> 
+                                   </div>
+                              </form>
+                         </div>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+          </div>
+     </div>
+</div>

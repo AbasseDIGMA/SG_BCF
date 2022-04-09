@@ -1,0 +1,18 @@
+<!-- Modal -->
+<div class="container-fluid">
+     <div class="row">
+          <div class="modal-md">
+               <div class="modal fade" id="delete_confirm_abonne{{abonne.id}}" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                 <div class="modal-dialog">
+                   <div class="modal-content">
+                     <span><h5 class="text-primary text-start ms-4 mt-3 "> <i class="fa fa-exclamation-triangle me-3 text-danger" aria-hidden="true"></i>  Supprimer l'abonné  {{abonne.first_name}}  {{abonne.last_name}} ?</h5></span>
+                     <div class="modal-body text-end">
+                       <a href="{% url 'delete_abonne_url' abonne.id %}"><button type="button" class="btn btn-default"><small> Oui</small></button></a>
+                       <button type="button" class="btn btn-default" data-dismiss="modal"><small> Non</small></button>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+          </div>
+     </div>
+</div>
